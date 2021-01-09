@@ -1,4 +1,4 @@
-PROJECT_NAME := "music-manager-metal-archives-wrapper"
+PROJECT_NAME := "music-manager-config-reader"
 PKG := "github.com/a-castellano/$(PROJECT_NAME)"
 PKG_LIST := $(shell go list ${PKG}/... | grep -v /vendor/)
 GO_FILES := $(shell find . -name '*.go' | grep -v /vendor/ | grep -v _test.go)

@@ -1,4 +1,4 @@
-module github.com/a-castellano/Config-Reader
+module github.com/a-castellano/music-manager-config-reader
 
 go 1.15
 

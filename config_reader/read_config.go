@@ -33,10 +33,10 @@ func ReadConfig() (Config, error) {
 	var configFileLocation string
 	var config Config
 
-	server_variables := []string{"host", "port", "user", "password"}
-	queue_names := []string{"incoming", "outgoing"}
-	queue_variables := []string{"name"}
-	origin_variables := []string{"name"}
+	serverVariables := []string{"host", "port", "user", "password"}
+	queueNames := []string{"incoming", "outgoing"}
+	queueVariables := []string{"name"}
+	originVariables := []string{"name"}
 
 	viper := viperLib.New()
 
@@ -55,21 +55,21 @@ func ReadConfig() (Config, error) {
 		return config, errors.New(errors.New("Fatal error reading config file: ").Error() + err.Error())
 	}
 
-	for _, server_variable := range server_variables {
+	for _, server_variable := range serverVariables {
 		if !viper.IsSet("server." + server_variable) {
 			return config, errors.New("Fatal error config: no server " + server_variable + " was found.")
 		}
 	}
 
-	for _, queue := range queue_names {
-		for _, variable := range queue_variables {
+	for _, queue := range queueNames {
+		for _, variable := range queueVariables {
 			if !viper.IsSet(queue + "." + variable) {
 				return config, errors.New("Fatal error config: no " + queue + " server " + variable + " variable was found.")
 			}
 		}
 	}
 
-	for _, origin_variable := range origin_variables {
+	for _, origin_variable := range originVariables {
 		if !viper.IsSet("origin." + origin_variable) {
 			return config, errors.New("Fatal error config: no origin " + origin_variable + " was found.")
 		}

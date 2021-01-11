@@ -90,6 +90,7 @@ pages:
   stage: deploy
   image: registry.windmaker.net:5005/a-castellano/limani/base:202012301714
   script:
+  - mkdir -p public
   - cp coverage.html public/
   artifacts:
     paths:

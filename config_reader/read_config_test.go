@@ -11,14 +11,14 @@ func TestProcessNoConfigFilePresent(t *testing.T) {
 	if err == nil {
 		t.Errorf("ReadConfig method without any valid config file should fail.")
 	} else {
-		if err.Error() != "Fatal error reading config file: Config File \"config\" Not Found in \"[/etc/music-manager-metal-archives-wrapper]\"" {
-			t.Errorf("Default config should be in /etc/music-manager-metal-archives-wrapper/config.toml, not in other place, error was '%s'.", err.Error())
+		if err.Error() != "Fatal error reading config file: Config File \"config\" Not Found in \"[/etc/music-manager]\"" {
+			t.Errorf("Default config should be in /etc/music-manager/config.toml, not in other place, error was '%s'.", err.Error())
 		}
 	}
 }
 
 func TestProcessServerNoDataInConfig(t *testing.T) {
-	os.Setenv("MUSIC_MANAGER_METAL_ARCHIVES_WRAPPER_CONFIG_FILE_LOCATION", "./config_files_test/server_no_data/")
+	os.Setenv("MUSIC_MANAGER_SERVICE_CONFIG_FILE_LOCATION", "./config_files_test/server_no_data/")
 	_, err := ReadConfig()
 	if err == nil {
 		t.Errorf("ReadConfig method without server data config should fail.")
@@ -30,7 +30,7 @@ func TestProcessServerNoDataInConfig(t *testing.T) {
 }
 
 func TestProcessServerOnlyHostInConfig(t *testing.T) {
-	os.Setenv("MUSIC_MANAGER_METAL_ARCHIVES_WRAPPER_CONFIG_FILE_LOCATION", "./config_files_test/server_only_host/")
+	os.Setenv("MUSIC_MANAGER_SERVICE_CONFIG_FILE_LOCATION", "./config_files_test/server_only_host/")
 	_, err := ReadConfig()
 	if err == nil {
 		t.Errorf("ReadConfig method without server port should fail.")
@@ -42,7 +42,7 @@ func TestProcessServerOnlyHostInConfig(t *testing.T) {
 }
 
 func TestProcessServerNoUserPasswordInConfig(t *testing.T) {
-	os.Setenv("MUSIC_MANAGER_METAL_ARCHIVES_WRAPPER_CONFIG_FILE_LOCATION", "./config_files_test/server_only_host_port/")
+	os.Setenv("MUSIC_MANAGER_SERVICE_CONFIG_FILE_LOCATION", "./config_files_test/server_only_host_port/")
 	_, err := ReadConfig()
 	if err == nil {
 		t.Errorf("ReadConfig method without user password should fail.")
@@ -54,7 +54,7 @@ func TestProcessServerNoUserPasswordInConfig(t *testing.T) {
 }
 
 func TestProcessNoOriginName(t *testing.T) {
-	os.Setenv("MUSIC_MANAGER_METAL_ARCHIVES_WRAPPER_CONFIG_FILE_LOCATION", "./config_files_test/no_origin/")
+	os.Setenv("MUSIC_MANAGER_SERVICE_CONFIG_FILE_LOCATION", "./config_files_test/no_origin/")
 	_, err := ReadConfig()
 	if err == nil {
 		t.Errorf("ReadConfig method without origin should fail.")
@@ -66,7 +66,7 @@ func TestProcessNoOriginName(t *testing.T) {
 }
 
 func TestOKConfig(t *testing.T) {
-	os.Setenv("MUSIC_MANAGER_METAL_ARCHIVES_WRAPPER_CONFIG_FILE_LOCATION", "./config_files_test/ok/")
+	os.Setenv("MUSIC_MANAGER_SERVICE_CONFIG_FILE_LOCATION", "./config_files_test/ok/")
 	config, err := ReadConfig()
 	if err != nil {
 		t.Errorf("ReadConfig with ok config shouln't return errors. Returned: %s.", err.Error())

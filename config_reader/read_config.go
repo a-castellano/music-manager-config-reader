@@ -33,6 +33,8 @@ func ReadConfig() (Config, error) {
 	var configFileLocation string
 	var config Config
 
+	var envVariable string = "MUSIC_MANAGER_SERVICE_CONFIG_FILE_LOCATION"
+
 	serverVariables := []string{"host", "port", "user", "password"}
 	queueNames := []string{"incoming", "outgoing"}
 	queueVariables := []string{"name"}
@@ -41,11 +43,11 @@ func ReadConfig() (Config, error) {
 	viper := viperLib.New()
 
 	//Look for config file location defined as env var
-	viper.BindEnv("MUSIC_MANAGER_METAL_ARCHIVES_WRAPPER_CONFIG_FILE_LOCATION")
-	configFileLocation = viper.GetString("MUSIC_MANAGER_METAL_ARCHIVES_WRAPPER_CONFIG_FILE_LOCATION")
+	viper.BindEnv(envVariable)
+	configFileLocation = viper.GetString(envVariable)
 	if configFileLocation == "" {
 		// Get config file from default location
-		configFileLocation = "/etc/music-manager-metal-archives-wrapper/"
+		configFileLocation = "/etc/music-manager/"
 	}
 	viper.SetConfigName("config")
 	viper.SetConfigType("toml")
